@@ -13,186 +13,25 @@ Calendar which allows you to:
 <hr>
 
 ## Endpoints
-
-### Events
-
-#### all events
-- **Request**: ```GET /events```
-- **Purpose**:  get list of events for the authenticated user
-- **Response status**: ```200 OK```
-- **Response body**: 
-```
-[
- {
-    "id":1,
-    "title":"Meeting",
-    "description": "Meeting to do this..." ,
-    "appr_minutes_todo": 30,
-    "importance": 5,
-    "start_at":"2025-10-26 09:15",
-    "end_at": "2025-10-27 03:15",
-    "notify_before_min": 15
- },
-    ...
-]
-```
-#### specific event
-- **Request**: ```GET /events/1```
-- **Purpose**:  get full info about event
-- **Response status**: ```200 OK``` 
-- **Response body**: 
-```
-{
-	"id":1,
-	"title":"Meeting",
-	"description": "Meeting to do this..." ,
-	"appr_minutes_todo": 30,
-	"importance": 5,
-	"start_at":"2025-10-26 09:15",  
-	"end_at": "2025-10-27 03:15",
-	"notify_before_min": 15
-}
-```
-#### create new  event
-- **Request**: ```POST /events```
-- **Purpose**:  add new event in user`s calendar
-- **Response status**: ```201 Created```
-- **Request body**: 
-```
-{
-	"title":"Meeting",
-	"description": "Meeting to do this..." ,
-	"appr_minutes_todo": 30,
-	"importance": 5,
-	"start_at":"2025-10-26 09:15",  
-	"end_at": "2025-10-27 03:15",
-	"notify_before_min": 15
-}
-```
-- **Response body**: 
-```
-{
-	"id":1,
-	"title":"Meeting",
-	"description": "Meeting to do this..." ,
-	"appr_minutes_todo": 30,
-	"importance": 5,
-	"start_at":"2025-10-26 09:15",  
-	"end_at": "2025-10-27 03:15",
-	"notify_before_min": 15
-}
-```
-#### update  event
-- **Request**: ```PATCH /events/1```
-- **Purpose**:  partial updates on  specific event
-- **Response status**:  ``200 OK``
-
-**Request body**: 
-```
-{
-	"description": "Team Meeting to do this..." ,
-	"notify_before_min": 20
-}
-```
-- **Response body**: 
-```
-{
-	"id":1,
-	"title":"Meeting",
-	"description": "Team Meeting to do this..." ,
-	"appr_minutes_todo": 30,
-	"importance": 5,
-	"start_at":"2025-10-26 09:15",  
-	"end_at": "2025-10-27 03:15",
-	"notify_before_min": 20
-}
-```
-#### delete  event
-- **Request**: ```DELETE /events/1```
-- **Purpose**:  delete specific event
-- **Response status**: ```204 No Content```
 <hr>
 
-### Subscriptions
+## Events
 
-#### all subscriptions
-- **Request**: ```GET /subscriptions```
-- **Purpose**:  Get a list of all subscriptions for the authenticated user
-- **Response status**: ```200 OK```
-- **Response body**: 
-```
-[
-  {
-    "id": 1,
-    "name": "Spotify",
-    "payment_date": "2025-10-26",
-    "cost": 5,
-    "cycle": "monthly"
-  },
-	..
-]
-```
-#### specific subscription
-- **Request**: ```GET /subscriptions/1```
-- **Purpose**:  get full info about subscription
-- **Response status**: ```200 OK``` 
-- **Response body**: 
-```
-  {
-    "id": 1,
-    "name": "Spotify",
-    "payment_date": "2025-10-26",
-    "cost": 5,
-    "cycle": "monthly"
-  }
-```
-#### create new  subscription
-- **Request**: ```POST /subscriptions```
-- **Purpose**:  add new subscription  to user`s list
-- **Response status**: ```201 Created```
-- **Request body**: 
-```
-  {
-    "name": "Spotify",
-    "payment_date": "2025-10-26",
-    "cost": 5,
-    "cycle": "monthly"
-  }
-```
-- **Response body**: 
-```
-  {
-    "id": 1,
-    "name": "Spotify",
-    "payment_date": "2025-10-26",
-    "cost": 5,
-    "cycle": "monthly"
-  }
-```
-#### update  subscription
-- **Request**: ```PATCH /subscriptions/1```
-- **Purpose**:  partial updates on  specific subscription
-- **Response status**:  ``200 OK``
-- **Request body**: 
-```
-  {
-    "cost": 10
-  }
+| Method   | Endpoint       | Description                                   | Response status                                 | Request body                                                                                                                                                                                                               | Response body                                                                                                                                                                                                                                                 |
+| -------- | -------------- | --------------------------------------------- | ----------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `GET`    | `/events`      | get list of events for the authenticated user | `200`                                           | -                                                                                                                                                                                                                          | [  <br> {   <br> "id":1,<br>"title":"Meeting",<br>"description": "Meeting to do this..." ,<br>"appr_minutes_todo": 30,<br>"importance": 5, <br>"start_at":"2025-10-26 09:15",<br>"end_at": "2025-10-27 03:15",<br>"notify_before_min": 15 }, <br> ...]|
+| `GET`    | `/events/{id}` | get full info about event                     | `200`, `404`(if not found)                      | -                                                                                                                                                                                                                          | {<br> "id":1,<br>"title":"Meeting",<br>"description": "Meeting to do this..." ,<br>"appr_minutes_todo": 30,<br> "importance": 5,<br>"start_at":"2025-10-26 09:15",<br> "end_at": "2025-10-27 03:15",<br>"notify_before_min": 15 <br>}                       |
+| `POST`   | `/events`      | add new event in user`s calendar              | `201`, `400`(if bad request)                    | {<br>"title":"Meeting",<br>"description": "Meeting to do this..." ,<br>"appr_minutes_todo": 30,<br>"importance": 5, <br> "start_at":"2025-10-26 09:15",<br> "end_at": "2025-10-27 03:15",<br>"notify_before_min": 15 <br> } | {<br> "id":1,<br>"title":"Meeting",<br>"description": "Meeting to do this..." ,<br>"appr_minutes_todo": 30,<br> "importance": 5,<br>"start_at":"2025-10-26 09:15",<br> "end_at": "2025-10-27 03:15",<br>"notify_before_min": 15 <br> }                    |
+| `PATCH`  | `/events/{id}` | partial updates on  specific event            | `200`, `404`(if not found), `400`(if bad request) | {  <br>"description": "Team Meeting to do ...",<br>"notify_before_min": 20}                                                                                                                                            | {<br>"id":1,<br>"title":"Meeting",<br>"description": "Team Meeting to do..." ,<br>"appr_minutes_todo": 30, <br> "importance": 5, <br>"start_at":"2025-10-26 09:15", <br>"end_at": "2025-10-27 03:15",<br>"notify_before_min": 20 <br> }                               |
+| `DELETE` | `/events/{id}` | delete specific event                         | `204`, `404`(if not found)                      | -                                                                                                                                                                                                                          | -                                                                                                                                                                                                                                                             |
 
-```
-- **Response body**: 
-```
-  {
-    "id": 1,
-    "name": "Spotify",
-    "payment_date": "2025-10-26",
-    "cost": 10,
-    "cycle": "monthly"
-  }
+## Subscriptions
 
-```
-#### delete  subscription
-- **Request**: ```DELETE /subscriptions/1```
-- **Purpose**:  delete specific subscription
-- **Response status**: ```204 No Content```
-<hr>
+| Method   | Endpoint              | Description                                                | Response status                                 | Request body                                                                                            | Response body                                                                                                                                                                           |
+| -------- | --------------------- | ---------------------------------------------------------- | ----------------------------------------------- | ------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `GET`    | `/subscriptions`      | Get a list of all subscriptions for the authenticated user | `200`                                           | -                                                                                                       | [  <br>  {    <br>  "id": 1,<br>  "name": "Spotify",<br>  "payment_date": "2025-10-26",<br>  "cost": 5,<br>  "cycle": "monthly" <br>  },    <br>  ...<br>  ]|
+| `GET`    | `/subscriptions/{id}` | get full info about subscription                           | `200`, `404`(if not found)                      | -                                                                                                       | {    <br>  "id": 1,<br>  "name": "Spotify",<br>  "payment_date": "2025-10-26",<br>  "cost": 5,<br>  "cycle": "monthly" <br>  }                                                          |
+| `POST`   | `/subscriptions`      | add new subscription  to user`s list                       | `201`, `400`(if bad request)                    | {    <br>  "name": "Spotify",<br>"payment_date": "2025-10-26",<br>  "cost": 5,<br>  "cycle": "monthly" <br>  } | {    <br>  "id": 1,<br>  "name": "Spotify",<br>  "payment_date": "2025-10-26",<br>  "cost": 5,<br>  "cycle": "monthly" <br>  }                                                          |
+| `PATCH`  | `/subscriptions/{id}` | partial updates on  specific subscription                  | `200`, `404`(if not found), `400`(if bad request) | {<br>"cost": 10<br>}                                                                                  | {    <br>  "id": 1,<br>  "name": "Spotify",<br>"payment_date": "2025-10-26",<br>  "cost": 10,<br>  "cycle": "monthly" <br>  }                                                           |
+| `DELETE` | `/subscriptions/{id}` | delete specific event                                      | `204`, `404`(if not found)                      | -                                                                                                       | -                                                                                                                                                                                       |
+
