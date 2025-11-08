@@ -1,1 +1,5 @@
 djangorestframework-simplejwt
+django-allauth
+dj-rest-auth
+cryptography
+requests
