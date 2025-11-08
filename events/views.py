@@ -2,10 +2,12 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from events.models import Event
 from events.serializers import EventSerializer
-from rest_framework import status
+from rest_framework import status, permissions
 
 
 class EventList(APIView):
+    permission_classes = [permissions.IsAuthenticated]
+
     def get(self, request):
         events = Event.objects.all()
         serializer = EventSerializer(events, many = True)
