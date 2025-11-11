@@ -1,3 +1,8 @@
+djangorestframework-simplejwt
+django-allauth
+dj-rest-auth
+cryptography
+requests
 django
 djangorestframework
 drf_yasg
