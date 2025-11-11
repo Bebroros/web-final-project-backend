@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     "allauth.socialaccount",
     'allauth.socialaccount.providers.google',
     'dj_rest_auth',
+    'drf_yasg',
 ]
 
 SITE_ID = 1
