@@ -3,6 +3,13 @@
 - Artem Shkilniuk: Bebroros
 - Vysokovskykh Kateryna: Kvstkk
 
+## How to start
+
+1. crontab -e 
+2. enter this to crontab: `\* \* \* \* \* [python_path] [calendar_project_path]/manage.py notifications >> [calendar_project_path]/cron.log 2>&1`
+3. python manage.py runserver
+
+
 ## Description
 Calendar which allows you to: 
 - add events
