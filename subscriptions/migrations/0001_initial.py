@@ -15,16 +15,13 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Event',
+            name='Subs',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('title', models.CharField(max_length=32)),
-                ('description', models.TextField(blank=True, null=True)),
-                ('appr_minutes_todo', models.IntegerField(default=15)),
-                ('importance', models.PositiveIntegerField(default=1)),
-                ('start_at', models.DateTimeField()),
-                ('end_at', models.DateTimeField()),
-                ('notify_before_min', models.IntegerField(default=15)),
+                ('name', models.CharField(max_length=32)),
+                ('payment_date', models.DateField()),
+                ('cost', models.DecimalField(decimal_places=2, max_digits=10)),
+                ('cycle', models.CharField(choices=[('monthly', 'Monthly'), ('weekly', 'Weekly'), ('daily', 'Daily'), ('fortnight', 'Fortnight')], default='monthly', max_length=10)),
                 ('owner', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
             ],
         ),
