@@ -3,13 +3,13 @@ from rest_framework.views import APIView
 from events.models import Event
 from events.serializers import EventSerializer
 from rest_framework import status, permissions
-
+from user_auth.permissions import IsUserOrAdmin
 
 class EventList(APIView):
     permission_classes = [permissions.IsAuthenticated]
 
     def get(self, request):
-        events = Event.objects.all()
+        events = Event.objects.filter(owner=request.user)
         serializer = EventSerializer(events, many = True)
         return Response(serializer.data, status=status.HTTP_200_OK)
     
@@ -22,7 +22,7 @@ class EventList(APIView):
 
 
 class EventDetail(APIView):
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.IsAuthenticated, IsUserOrAdmin]
 
     def get(self, request, pk):
         try:

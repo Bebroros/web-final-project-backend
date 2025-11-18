@@ -3,12 +3,13 @@ from rest_framework.views import APIView
 from subscriptions.models import Subs
 from subscriptions.serializers import SubsSerializer
 from rest_framework import status, permissions
+from user_auth.permissions import IsUserOrAdmin
 
 class SubsList(APIView):
     permission_classes = [permissions.IsAuthenticated]
 
     def get(self, request):
-        subs = Subs.objects.all()
+        subs = Subs.objects.filter(owner=request.user)
         serializer = SubsSerializer(subs, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
@@ -21,7 +22,7 @@ class SubsList(APIView):
 
 
 class SubsDetails(APIView):
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.IsAuthenticated, IsUserOrAdmin]
 
     def get(self, request, pk):
         try:
