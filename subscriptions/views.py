@@ -1,3 +1,4 @@
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from subscriptions.models import Subs
@@ -5,8 +6,9 @@ from subscriptions.serializers import SubsSerializer
 from rest_framework import status
 from user_auth.permissions import IsOwnerOrAdmin
 
+
 class SubsList(APIView):
-    permission_classes = [IsOwnerOrAdmin]
+    permission_classes = [IsAuthenticated, IsOwnerOrAdmin]
 
     def get(self, request):
         if request.user.is_staff:
@@ -25,7 +27,7 @@ class SubsList(APIView):
 
 
 class SubsDetails(APIView):
-    permission_classes = [IsOwnerOrAdmin]
+    permission_classes = [IsAuthenticated, IsOwnerOrAdmin]
 
     def get(self, request, pk):
         try:

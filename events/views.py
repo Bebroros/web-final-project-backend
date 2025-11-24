@@ -4,9 +4,11 @@ from events.models import Event
 from events.serializers import EventSerializer
 from rest_framework import status
 from user_auth.permissions import IsOwnerOrAdmin
+from rest_framework.permissions import IsAuthenticated
+
 
 class EventList(APIView):
-    permission_classes = [IsOwnerOrAdmin]
+    permission_classes = [IsAuthenticated, IsOwnerOrAdmin]
 
     def get(self, request):
         if request.user.is_staff:
@@ -25,7 +27,7 @@ class EventList(APIView):
 
 
 class EventDetail(APIView):
-    permission_classes = [IsOwnerOrAdmin]
+    permission_classes = [IsAuthenticated, IsOwnerOrAdmin]
 
     def get(self, request, pk):
         try:
