@@ -6,8 +6,9 @@
 ## How to start
 
 1. crontab -e 
-2. enter this to crontab: `\* \* \* \* \* [python_path] [calendar_project_path]/manage.py notifications >> [calendar_project_path]/cron.log 2>&1`
-3. python manage.py runserver
+2. enter this to crontab: `* * * * * [python_path] [calendar_project_path]/manage.py event_notifications >> [calendar_project_path]/cron.log 2>&1`
+3. enter this to crontab: `0 12 * * * [python_path] [calendar_project_path]/manage.py sub_notifications >> [calendar_project_path]/cron.log 2>&1`
+4. python manage.py runserver
 
 
 ## Description

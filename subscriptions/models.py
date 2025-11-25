@@ -15,7 +15,7 @@ class Subs(models.Model):
     }
 
     name = models.CharField(max_length=32)
-    payment_date = models.DateField()
+    payment_date = models.DateField(db_index=True)
     cost = models.DecimalField(max_digits=10, decimal_places=2)
     cycle = models.CharField(max_length=10,
                              choices=CYCLE_CHOICES,

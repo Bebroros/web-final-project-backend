@@ -7,3 +7,4 @@ django
 djangorestframework
 drf_yasg
 python-dotenv
+python-dateutil
