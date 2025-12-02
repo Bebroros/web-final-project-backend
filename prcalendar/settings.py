@@ -59,6 +59,7 @@ INSTALLED_APPS = [
     'dj_rest_auth',
     'drf_yasg',
     'subscriptions',
+    'corsheaders',
 ]
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
@@ -107,6 +108,11 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'allauth.account.middleware.AccountMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+]
+
+CORS_ORIGIN_WHITELIST=[
+    'http://localhost:3000',
 ]
 
 ROOT_URLCONF = 'prcalendar.urls'
