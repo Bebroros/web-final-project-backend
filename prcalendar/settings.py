@@ -59,6 +59,7 @@ INSTALLED_APPS = [
     'dj_rest_auth',
     'drf_yasg',
     'subscriptions',
+    'todo',
 ]
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
