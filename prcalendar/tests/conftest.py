@@ -3,6 +3,7 @@ from rest_framework.test import APIClient
 from events.models import Event
 from subscriptions.models import Subs
 from user_auth.models import CustomUser
+from todo.models import Todo
 
 
 @pytest.fixture(scope='function')
@@ -50,7 +51,6 @@ def event(user, authenticate):
 
 @pytest.fixture(scope='function')
 def sub(user):
-    """Створює тестову підписку, прив'язану до юзера"""
     return Subs.objects.create(
         owner=user,
         name="Netflix Premium",
@@ -60,3 +60,12 @@ def sub(user):
     )
 
 
+@pytest.fixture(scope='function')
+def todo(user):
+    return Todo.objects.create(
+        owner=user,
+        title='TestTodo',
+        importance=1,
+        duration=30,
+        description='Test description',
+    )
