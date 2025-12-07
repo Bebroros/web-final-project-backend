@@ -1,4 +1,5 @@
 import pytest
+import requests_mock
 from rest_framework.test import APIClient
 from events.models import Event
 from subscriptions.models import Subs
@@ -69,3 +70,8 @@ def todo(user):
         duration=30,
         description='Test description',
     )
+
+@pytest.fixture(scope='function')
+def mocker():
+    with requests_mock.Mocker() as mock:
+        yield mock
