@@ -10,7 +10,7 @@ import os
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def get_horoscope(request):
-    api_key = os.environ.get("OPENROUTER_API_KEY")
+    API_KEY = os.getenv('OPENROUTER_API_KEY')
 
     today = d.today()
     user = request.user
@@ -21,7 +21,7 @@ def get_horoscope(request):
     response = requests.post(
         url="https://openrouter.ai/api/v1/chat/completions",
         headers={
-            "Authorization": f"Bearer {api_key}",
+            "Authorization": f"Bearer {API_KEY}",
             "Content-Type": "application/json",
         },
         data=json.dumps({
@@ -36,7 +36,9 @@ def get_horoscope(request):
             ]
         })
     )
-
-    data = response.json()
-    horoscope_text = data['choices'][0]['message']['content']
-    return Response({"horoscope": horoscope_text})
+    if response.status_code == 200:
+        data = response.json()
+        horoscope_text = data['choices'][0]['message']['content']
+        return Response({"horoscope": horoscope_text})
+    else:
+        return Response({"horoscope": "Stars are not talkative today, but you got this!"})
