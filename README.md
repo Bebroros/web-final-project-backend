@@ -32,7 +32,7 @@ You can view all endpoints at http://127.0.0.1:8000/swagger
 
 ## Tests
 
-pytest [project]/prcalendar/test/test*
+pytest [project]/prcalendar/tests/test*
 
 ## Database
 
