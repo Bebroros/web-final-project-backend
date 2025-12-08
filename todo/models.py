@@ -4,7 +4,7 @@ from prcalendar import settings
 
 class Todo(models.Model):
     title = models.CharField(max_length=100)
-    description = models.TextField()
+    description = models.TextField(blank=True, null=True)
     importance = models.IntegerField()
     duration = models.IntegerField()
     owner = models.ForeignKey(

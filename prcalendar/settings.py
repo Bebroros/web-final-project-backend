@@ -61,6 +61,7 @@ INSTALLED_APPS = [
     'subscriptions',
     'todo',
     'corsheaders',
+    'horoscope',
 ]
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
